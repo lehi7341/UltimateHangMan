@@ -66,7 +66,7 @@ function checkLetters(letter) {
         // Letter wasn't found
         else {
             wrongSelections.push(letter);
-            numGuesses--
+            guessesLeft--
         }
 
         // Test
@@ -76,8 +76,34 @@ function checkLetters(letter) {
     }
 
     function roundComplete() {
-        console.log("Win Count: " + windCount + " | Loss Count: " + lossCount + " | Guesses Left" + numGuesses);
-        
+        console.log("Win Count: " + winCount + " | Loss Count: " + lossCount + " | Guesses Left" + guessesLeft);
+
+        // Update the HTML to reflect new game stats
+        document.getElementById("numGuesses").innerHTML = guessesLeft;
+        document.getElementById("wordToGuess").innerHTML = blanksAndCorrects.join(" ");
+        document.getElementById("wrongGuesses").innerHTML = wrongSelections.join(" ");
+
+        // Check if user won
+        if (wordLetters.toString() == blanksAndCorrects.toString()) {
+            winCount++;
+            alert("You Win");
+
+            // Update the win counter in the HTML
+            document.getElementById("winCounter").innerHTML = winCount;
+
+            startGame();
+        }
+
+        // Check if user lost
+        else if (guessesLeft == 0) {
+            lossCount++;
+            alert("You Lost!");
+
+            // Update the HTML
+            document.getElementById("lossCounter").innerHTML = lossCount;
+
+            startGame();
+        }
     }
 
 // Main Process
@@ -91,6 +117,8 @@ startGame();
 document.onkeyup = function(event) {
     var letterGuessed = String.fromCharCode(event.keyCode).toLocaleLowerCase();
     checkLetters(letterGuessed);
+    roundComplete();
+
     // Test
     console.log(letterGuessed);
 }
