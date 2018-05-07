@@ -87,6 +87,7 @@ function checkLetters(letter) {
         if (wordLetters.toString() == blanksAndCorrects.toString()) {
             winCount++;
             alert("You Win");
+            
 
             // Update the win counter in the HTML
             document.getElementById("winCounter").innerHTML = winCount;
