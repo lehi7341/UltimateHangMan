@@ -1,2 +1,1 @@
-# WordGuessGame
-Homework 3
+# Ultimate Hang Man
